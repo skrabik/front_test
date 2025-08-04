@@ -14,8 +14,4 @@ services:
     networks:
       - vpnservice_network
     environment:
-      - NODE_ENV=production
-
-networks:
-  vpnservice_network:
-    external: true 
+      - NODE_ENV=production 

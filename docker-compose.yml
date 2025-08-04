@@ -2,12 +2,20 @@ version: '3.8'
 
 services:
   frontend:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vpnservice_frontend
+    restart: unless-stopped
     ports:
       - "8000:8000"
     volumes:
-      # Mount Let's Encrypt certificates
       - /etc/letsencrypt:/etc/letsencrypt:ro
-    restart: unless-stopped
+    networks:
+      - vpnservice_network
     environment:
-      - NODE_ENV=production 
+      - NODE_ENV=production
+
+networks:
+  vpnservice_network:
+    external: true 

@@ -1,5 +1,5 @@
 # Build stage
-FROM node:lts-alpine as build
+FROM node:lts-alpine AS build
 WORKDIR /app
 
 # Copy package files
@@ -20,8 +20,8 @@ FROM nginx:alpine
 # Copy built files to nginx
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy nginx configuration (temporary without SSL)
+COPY nginx.conf.temp /etc/nginx/conf.d/default.conf
 
 # Create SSL directory
 RUN mkdir -p /etc/nginx/ssl
